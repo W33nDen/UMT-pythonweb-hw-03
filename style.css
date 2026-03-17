@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+.form-signin {
+  max-width: 600px;
+}
+
+textarea.form-control {
+  min-height: 150px;
+}
