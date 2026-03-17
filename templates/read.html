@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Messages</title>
+  <title>All Messages</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
@@ -22,29 +26,33 @@
       </div>
     </nav>
   </header>
-  <main class="container mt-4">
-    <h1>All Messages</h1>
+  <main class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Recent Messages</h1>
+        <a href="/message.html" class="btn btn-primary">New Message</a>
+    </div>
+    
     {% if messages %}
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Username</th>
-            <th>Message</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for timestamp, data in messages.items() %}
-          <tr>
-            <td>{{ timestamp }}</td>
-            <td>{{ data.username }}</td>
-            <td>{{ data.message }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="row g-4">
+        {% for timestamp, data in messages.items()|reverse %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between mb-2">
+                <h5 class="card-title text-primary mb-0">@{{ data.username }}</h5>
+                <small class="text-muted">{{ timestamp.split('.')[0] }}</small>
+              </div>
+              <p class="card-text text-light">{{ data.message }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     {% else %}
-      <p class="text-muted">No messages yet. <a href="/message.html">Send one!</a></p>
+      <div class="text-center py-5">
+        <p class="fs-4 text-muted mb-4">No messages yet. Be the first to start the conversation!</p>
+        <a href="/message.html" class="btn btn-primary btn-lg">Send a Message</a>
+      </div>
     {% endif %}
   </main>
 </body>
